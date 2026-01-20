@@ -1,0 +1,18 @@
+# Datasets
+data/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+.env/
+
+# Model outputs
+*.pth
+*.ckpt
+
+# OS files
+.DS_Store
+Thumbs.db
