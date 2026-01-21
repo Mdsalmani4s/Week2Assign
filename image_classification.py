@@ -200,3 +200,43 @@ with torch.no_grad():
     nn_accuracy = (predicted == y_test_tensor).sum().item() / len(y_test_tensor)
 
 print(f"✓ Neural Network Accuracy: {nn_accuracy:.4f}")
+
+
+
+#######📊 Step 5: Compare Classifier Performance
+
+import matplotlib.pyplot as plt
+
+print("\n" + "="*50)
+print("CLASSIFIER PERFORMANCE COMPARISON")
+print("="*50)
+
+# Display all accuracies
+print(f"\n📊 Final Results:")
+print(f"  SVM Accuracy:            {svm_accuracy:.4f}")
+print(f"  Softmax Accuracy:        {softmax_accuracy:.4f}")
+print(f"  Neural Network Accuracy: {nn_accuracy:.4f}")
+
+# Find best classifier
+classifiers = ["SVM", "Softmax", "Neural Network"]
+accuracies = [svm_accuracy, softmax_accuracy, nn_accuracy]
+best_idx = accuracies.index(max(accuracies))
+print(f"\n🏆 Best Classifier: {classifiers[best_idx]} ({accuracies[best_idx]:.4f})")
+
+# Plot performance comparison
+plt.figure(figsize=(10, 6))
+bars = plt.bar(classifiers, accuracies, color=['#3498db', '#e74c3c', '#2ecc71'])
+
+# Add value labels on bars
+for i, (bar, acc) in enumerate(zip(bars, accuracies)):
+    plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.01, 
+             f'{acc:.4f}', ha='center', va='bottom', fontsize=12, fontweight='bold')
+
+plt.ylabel("Accuracy", fontsize=12)
+plt.title("Classifier Performance Comparison", fontsize=14, fontweight='bold')
+plt.ylim([0, 1.0])
+plt.grid(axis='y', alpha=0.3)
+plt.tight_layout()
+plt.show()
+
+print("\n✓ Comparison complete!")
